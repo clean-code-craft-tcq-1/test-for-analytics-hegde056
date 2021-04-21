@@ -41,8 +41,8 @@ What is included in the software unit-test? What is not? Fill this table.
 Battery Data-accuracy       | No            | We do not test the accuracy of data
 Computation of maximum      | Yes           | This is part of the software being developed
 Off-the-shelf PDF converter | _enter Yes/No | _enter reasoning
-Counting the breaches       | _enter Yes/No | _enter reasoning
-Detecting trends            | _enter Yes/No | _enter reasoning
+Counting the breaches       | Yes           | This is part of the analysis-functionality software being developed. 
+Detecting trends            | Yes           | This is part of the analysis-functionality software being developed.
 Notification utility        | _enter Yes/No | _enter reasoning
 
 ### List the Test Cases
@@ -68,8 +68,8 @@ Enter one part that's real and another part that's faked/mocked.
 |--------------------------|--------------|-----------------------------|---
 Read input from server     | csv file     | internal data-structure     | Fake the server store
 Validate input             | csv data     | valid / invalid             | None - it's a pure function
-Notify report availability | _enter input | _enter output               | _enter fake or mock
-Report inaccessible server | _enter input | _enter output               | _enter fake or mock
-Find minimum and maximum   | _enter input | _enter output               | _enter fake or mock
-Detect trend               | _enter input | _enter output               | _enter fake or mock
-Write to PDF               | _enter input | _enter output               | _enter fake or mock
+Notify report availability | New PDF report| Notification to user say Email| Mock the email notification
+Report inaccessible server | server path/location | error code/message  | Fake server inacessibility
+Find minimum and maximum   | validated csv data | min value & max value from the total csv data| None - it's a pure function
+Detect trend               | validated csv data |    timestamp data      | None - it's a pure function
+Write to PDF               | internal analysis data | PDF report file   | Fake PDF creation from internal analysis data
