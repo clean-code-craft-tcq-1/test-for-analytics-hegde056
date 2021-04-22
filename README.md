@@ -2,7 +2,7 @@
 
 Design tests for Analytics functionality on a Battery Monitoring System.
 
-Fill the parts marked '_enter' in the **Tasks** section below.
+Fill the parts marked 'ENTER' in the **Tasks** section below.
 
 ## Analysis-functionality to be tested
 
@@ -27,10 +27,13 @@ Notification must be sent when a new report is available.
 List the dependencies of the Analysis-functionality.
 
 1. Access to the Server containing the telemetrics in a csv file
-1. _enter dependency
-1. _enter dependency
+1. Validity of csv file i.e Uncorrupted 
+2. Read access to csv file i.e not locked 
+3. Threshold levels for calculating breaches. 
+4. Server and storage space availability for storing PDF reports
+5. Notification Utility availability (network online/offline)
+6. Fixing a day of week for PDF storage per week. 
 
-(add more if needed)
 
 ### Mark the System Boundary
 
@@ -40,10 +43,10 @@ What is included in the software unit-test? What is not? Fill this table.
 |---------------------------|---------------|---
 Battery Data-accuracy       | No            | We do not test the accuracy of data
 Computation of maximum      | Yes           | This is part of the software being developed
-Off-the-shelf PDF converter | _enter Yes/No | _enter reasoning
-Counting the breaches       | _enter Yes/No | _enter reasoning
-Detecting trends            | _enter Yes/No | _enter reasoning
-Notification utility        | _enter Yes/No | _enter reasoning
+Off-the-shelf PDF converter | No            | PDF convertor utility taken from third party who would be responsible for PDF conversion and covers the tests
+Counting the breaches       | Yes           | This is part of the analysis-functionality software being developed. 
+Detecting trends            | Yes           | This is part of the analysis-functionality software being developed.
+Notification utility        | No            | Testing if notification has reached the user is not part of test.   
 
 ### List the Test Cases
 
@@ -53,10 +56,16 @@ Add to these tests:
 
 1. Write minimum and maximum to the PDF from a csv containing positive and negative readings
 1. Write "Invalid input" to the PDF when the csv doesn't contain expected data
-1. _enter a test
-1. _enter a test
-
-(add more)
+1. Write "File Inaccessible" to the PDF when the csv file is inacessible i.e no read access due to locks. 
+1. Write "File not found" to PDF when csv file is not available in the server. 
+2. Write N number of breaches to PDF from a csv containing readings that cross upper and/or lower thresholds
+3. Write 0 number of breaches to PDF from a csv containing readings that do NOT cross upper or lower thresholds
+4. Write timestamp to PDF for recording trends when the reading was continuously increasing for 30 minutes
+5. No timestamp trend in PDF report when the reading was NOT continuously increasing for 30 minutes
+6. PDF storage to server is triggered when the new PDF report is generated on pre-determined day of week. 
+7. No PDF report storage when the day is other than the pre-determined storing day.
+8. "New report available" trigger to Notification Utility when new PDF report is available in the storage server. 
+9. No triggering of Notification utility when the day is other than the pre-determined day when PDF report will be available. 
 
 ### Recognize Fakes and Reality
 
@@ -68,8 +77,8 @@ Enter one part that's real and another part that's faked/mocked.
 |--------------------------|--------------|-----------------------------|---
 Read input from server     | csv file     | internal data-structure     | Fake the server store
 Validate input             | csv data     | valid / invalid             | None - it's a pure function
-Notify report availability | _enter input | _enter output               | _enter fake or mock
-Report inaccessible server | _enter input | _enter output               | _enter fake or mock
-Find minimum and maximum   | _enter input | _enter output               | _enter fake or mock
-Detect trend               | _enter input | _enter output               | _enter fake or mock
-Write to PDF               | _enter input | _enter output               | _enter fake or mock
+Notify report availability | New PDF report| Notification to user(say Email)| Mock the email notification
+Report inaccessible server | server path/location | error code/message  | mock server inacessibility
+Find minimum and maximum   | validated csv data | min value & max value from the total csv data| None - it's a pure function
+Detect trend               | validated csv data |    timestamp data      | None - it's a pure function
+Write to PDF               | internal analysis data | PDF report file   | Fake PDF creation from internal analysis data
