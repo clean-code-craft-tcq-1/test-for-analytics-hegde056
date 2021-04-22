@@ -27,10 +27,10 @@ Notification must be sent when a new report is available.
 List the dependencies of the Analysis-functionality.
 
 1. Access to the Server containing the telemetrics in a csv file
-1. _enter dependency
-1. _enter dependency
+1. Validity of csv file i.e Uncorrupted 
+2. Read access to csv file i.e not locked 
+3. Threshold levels for calculating breaches. 
 
-(add more if needed)
 
 ### Mark the System Boundary
 
@@ -40,10 +40,10 @@ What is included in the software unit-test? What is not? Fill this table.
 |---------------------------|---------------|---
 Battery Data-accuracy       | No            | We do not test the accuracy of data
 Computation of maximum      | Yes           | This is part of the software being developed
-Off-the-shelf PDF converter | No            |  
+Off-the-shelf PDF converter | No            | PDF convertor utility taken from third party who would be responsible for PDF conversion and covers the tests
 Counting the breaches       | Yes           | This is part of the analysis-functionality software being developed. 
 Detecting trends            | Yes           | This is part of the analysis-functionality software being developed.
-Notification utility        | No            |  
+Notification utility        | No            | Testing if notification has reached the user is not part of test.   
 
 ### List the Test Cases
 
@@ -69,7 +69,7 @@ Enter one part that's real and another part that's faked/mocked.
 Read input from server     | csv file     | internal data-structure     | Fake the server store
 Validate input             | csv data     | valid / invalid             | None - it's a pure function
 Notify report availability | New PDF report| Notification to user say Email| Mock the email notification
-Report inaccessible server | server path/location | error code/message  | Fake server inacessibility
+Report inaccessible server | server path/location | error code/message  | mock server inacessibility
 Find minimum and maximum   | validated csv data | min value & max value from the total csv data| None - it's a pure function
 Detect trend               | validated csv data |    timestamp data      | None - it's a pure function
 Write to PDF               | internal analysis data | PDF report file   | Fake PDF creation from internal analysis data
